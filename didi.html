@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banaras Law Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF7;
+    --ink:#171512;
+    --ink-soft:#6E6A62;
+    --crimson:#7A1128;
+    --crimson-deep:#5C0C1D;
+    --hairline:#E5E1D6;
+    --tag-bg:#F1ECE1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .sans{font-family:'IBM Plex Sans', sans-serif;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  .instbar{background:var(--crimson-deep);}
+  .instbar .wrap{
+    display:flex; align-items:center; gap:14px;
+    padding:10px 28px;
+  }
+  .instbar img.logo{
+    height:34px; width:34px; object-fit:contain; border-radius:50%;
+    background:#fff; padding:3px;
+  }
+  .instbar .instname{
+    font-family:'IBM Plex Sans', sans-serif; color:#fff; font-size:13px; line-height:1.3;
+  }
+  .instbar .instname b{display:block; font-size:14.5px;}
+
+  .utility{border-bottom:1px solid var(--hairline);}
+  .utility .wrap{
+    display:flex; justify-content:flex-end; gap:22px;
+    padding:9px 28px; font-family:'IBM Plex Sans', sans-serif;
+    font-size:12.5px; color:var(--ink-soft);
+  }
+  .utility a:hover{color:var(--crimson);}
+
+  .brandbar{padding:34px 0 22px; text-align:center; border-bottom:1px solid var(--hairline);}
+  .brandbar .eyebrow{
+    font-family:'IBM Plex Sans', sans-serif; font-size:11.5px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--crimson); margin-bottom:10px; font-weight:600;
+  }
+  .brandbar h1{
+    font-size:clamp(30px, 4.4vw, 44px); font-weight:600; margin:0; letter-spacing:-0.01em;
+  }
+
+  nav.primary{
+    position:sticky; top:0; z-index:40; background:var(--paper);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav.primary .wrap{
+    display:flex; align-items:center; justify-content:center; gap:36px;
+    padding:15px 28px; font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px; font-weight:500; flex-wrap:wrap;
+  }
+  nav.primary a{padding:4px 2px; border-bottom:2px solid transparent;}
+  nav.primary a:hover{border-color:var(--crimson); color:var(--crimson);}
+
+  /* Dropdown Styles */
+  nav.primary .dropdown { position: relative; display: flex; align-items: center; }
+  
+  /* Invisible bridge to fix the hover gap */
+  nav.primary .dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    right: -20px;
+    height: 12px;
+    background: transparent;
+  }
+  
+  nav.primary .dropdown-content {
+    display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+    background: var(--paper); min-width: 240px; box-shadow: 0px 8px 24px rgba(0,0,0,0.06);
+    z-index: 50; border: 1px solid var(--hairline); padding: 8px 0; text-align: left;
+  }
+  nav.primary .dropdown-content a {
+    padding: 10px 18px; border-bottom: none; display: block; font-weight: 400; font-size: 13.5px;
+  }
+  nav.primary .dropdown-content a:hover {
+    background: var(--tag-bg); color: var(--crimson); border-bottom: none;
+  }
+  nav.primary .dropdown:hover .dropdown-content { display: block; }
+  nav.primary .dropdown .dropbtn { padding: 4px 2px; border-bottom: 2px solid transparent; display: inline-flex; align-items: center; gap: 4px; }
+  nav.primary .dropdown .dropbtn::after {
+    content: "▾"; font-size: 10px; transition: transform 0.2s;
+  }
+  nav.primary .dropdown:hover .dropbtn { border-color: var(--crimson); color: var(--crimson); }
+  nav.primary .dropdown:hover .dropbtn::after { transform: rotate(180deg); }
+
+  section{padding:48px 0;}
+  .rule-top{border-top:1px solid var(--hairline);}
+  .section-title{
+    font-family:'IBM Plex Sans', sans-serif; font-size:12px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--ink-soft); font-weight:600;
+    display:flex; align-items:center; gap:12px; margin-bottom:26px;
+  }
+  .section-title::after{content:""; flex:1; height:1px; background:var(--hairline);}
+
+  .vol-head{padding-bottom:8px;}
+  .vol-head h2{font-size:26px; font-weight:600; margin:0 0 6px;}
+  .vol-head .sub{font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; color:var(--ink-soft);}
+
+  .feed{border-top:1px solid var(--hairline);}
+  .feed-item{
+    padding:28px 0; border-bottom:1px solid var(--hairline);
+    display:grid; grid-template-columns:1fr; gap:8px;
+  }
+  .tags{display:flex; gap:8px; flex-wrap:wrap;}
+  .tag{
+    font-family:'IBM Plex Sans', sans-serif; font-size:11px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.05em;
+    background:var(--tag-bg); color:var(--crimson-deep);
+    padding:4px 9px; border-radius:2px;
+  }
+  .feed-item h3{font-size:22px; font-weight:600; line-height:1.3; margin:2px 0 0;}
+  .feed-item h3 a:hover{color:var(--crimson);}
+  .feed-item .dek{color:var(--ink-soft); font-size:15.5px; margin:2px 0 0; max-width:70ch;}
+  .byline{font-family:'IBM Plex Sans', sans-serif; font-size:13px; color:var(--ink-soft); margin-top:6px;}
+  .byline a{border-bottom:1px solid transparent;}
+  .byline a:hover{color:var(--crimson); border-color:var(--crimson);}
+  .feed-item.lead h3{font-size:30px;}
+  .feed-item.lead .dek{font-size:16.5px;}
+
+  .about-box{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  .about-box p{color:var(--ink); font-size:16px;}
+  .quicklinks{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--hairline);}
+  .quicklinks a{
+    font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; font-weight:500;
+    padding:14px 0; border-bottom:1px solid var(--hairline);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .quicklinks a:hover{color:var(--crimson);}
+  .quicklinks a::after{content:"→"; color:var(--ink-soft);}
+  .quicklinks a:hover::after{color:var(--crimson);}
+
+  .mini-grid{display:grid; grid-template-columns:1fr 1fr; gap:52px;}
+  .mini-list{border-top:1px solid var(--hairline);}
+  .mini-item{padding:18px 0; border-bottom:1px solid var(--hairline);}
+  .mini-item h4{font-size:17px; font-weight:600; margin:0 0 4px;}
+  .mini-item .byline{margin-top:0;}
+
+  .topic-pills{display:flex; flex-wrap:wrap; gap:10px;}
+  .topic-pill{
+    font-family:'IBM Plex Sans', sans-serif; font-size:13.5px;
+    border:1px solid var(--hairline); padding:9px 16px; border-radius:999px;
+  }
+  .topic-pill:hover{border-color:var(--crimson); color:var(--crimson);}
+
+  .cta-banner{
+    background:var(--crimson-deep); color:var(--paper);
+    padding:44px 44px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;
+  }
+  .cta-banner h3{font-size:24px; font-weight:600; margin:0 0 6px;}
+  .cta-banner p{font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; opacity:0.85; margin:0; max-width:52ch;}
+  .cta-btn{
+    font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; font-weight:600;
+    background:var(--paper); color:var(--crimson-deep); padding:13px 24px;
+    white-space:nowrap;
+  }
+  .cta-btn:hover{background:transparent; color:var(--paper); outline:1px solid var(--paper);}
+
+  .archive-list{border-top:1px solid var(--hairline);}
+  .archive-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0; border-bottom:1px solid var(--hairline);
+    font-family:'IBM Plex Sans', sans-serif; font-size:14.5px;
+  }
+  .archive-row:hover{color:var(--crimson);}
+  .archive-row .yr{color:var(--ink-soft);}
+
+  footer{border-top:1px solid var(--hairline); padding:48px 0 30px;}
+  footer .wrap{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px;}
+  footer h5{
+    font-family:'IBM Plex Sans', sans-serif; font-size:12px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); margin:0 0 14px; font-weight:600;
+  }
+  footer .fname{font-weight:600; font-size:16px; margin-bottom:8px;}
+  footer .fdesc{font-size:14px; color:var(--ink-soft); max-width:34ch;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  footer ul a{font-family:'IBM Plex Sans', sans-serif; font-size:14px; color:var(--ink);}
+  footer ul a:hover{color:var(--crimson);}
+  .foot-bottom{
+    margin-top:36px; padding-top:20px; border-top:1px solid var(--hairline);
+    font-family:'IBM Plex Sans', sans-serif; font-size:12.5px; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width:820px){
+    .about-box, .mini-grid{grid-template-columns:1fr; gap:28px;}
+    footer .wrap{grid-template-columns:1fr 1fr; row-gap:30px;}
+    nav.primary .wrap{gap:18px 22px; font-size:13px;}
+    nav.primary .dropdown-content { min-width: 200px; left: 0; transform: none; }
+  }
+  @media (max-width:560px){
+    footer .wrap{grid-template-columns:1fr;}
+    .cta-banner{padding:32px 24px;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+  a:focus-visible, .topic-pill:focus-visible{outline:2px solid var(--crimson); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="utility">
+  <div class="wrap">
+    <a href="#submissions">Review Policy</a>
+    <a href="#archive">Subscribe</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<div class="brandbar">
+  <div class="eyebrow">Faculty of Law · Banaras Hindu University</div>
+  <h1>Banaras Law Journal</h1>
+</div>
+
+<nav class="primary">
+  <div class="wrap">
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Publication</a>
+      <div class="dropdown-content">
+        <a href="#blj">Banaras Law Journal</a>
+        <a href="#mslr">Mahamana Student Law Review</a>
+      </div>
+    </div>
+    <a href="#notes">Latest Issue</a>
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Explore</a>
+      <div class="dropdown-content">
+        <a href="#author">Explore by Author</a>
+        <a href="#topic">Explore by Topic</a>
+        <a href="#volume">Explore by Volume</a>
+        <a href="#issue-exp">Explore by Issue</a>
+      </div>
+    </div>
+    <a href="#archive">Archives</a>
+    <a href="#submissions">Review Policy</a>
+    <a href="#board">Board of Reviewers</a>
+    <a href="#contact">About</a>
+  </div>
+</nav>
+
+<section id="issue">
+  <div class="wrap">
+    <div class="vol-head">
+      <h2>Volume LV, Issue 1</h2>
+      <div class="sub">2026 · Faculty of Law, Banaras Hindu University</div>
+    </div>
+    <div class="feed">
+      <article class="feed-item lead">
+        <div class="tags"><span class="tag">Constitutional Law</span><span class="tag">Symposium</span></div>
+        <h3><a href="#">Constitutional Morality and the Basic Structure Doctrine: A Reassessment</a></h3>
+        <p class="dek">A reexamination of the basic structure doctrine's place in Indian constitutional interpretation, and what six decades of application reveal about its limits.</p>
+        <div class="byline">Author Name — Faculty of Law, BHU</div>
+      </article>
+      <article class="feed-item">
+        <div class="tags"><span class="tag">Data Protection</span></div>
+        <h3><a href="#">Data Protection Law in India: Reconciling Privacy and Public Interest</a></h3>
+        <div class="byline">Author Name — Guest Contributor</div>
+      </article>
+      <article class="feed-item">
+        <div class="tags"><span class="tag">Environmental Law</span></div>
+        <h3><a href="#">Revisiting Environmental Jurisprudence After the National Green Tribunal</a></h3>
+        <div class="byline">Author Name — Research Scholar</div>
+      </article>
+      <article class="feed-item">
+        <div class="tags"><span class="tag">Arbitration</span><span class="tag">Case Comment</span></div>
+        <h3><a href="#">Arbitration and Public Policy: A Comment on Recent Supreme Court Rulings</a></h3>
+        <div class="byline">Author Name — Student Editor</div>
+      </article>
+      <article class="feed-item">
+        <div class="tags"><span class="tag">Criminal Law</span></div>
+        <h3><a href="#">Sentencing Discretion and Proportionality in Indian Criminal Law</a></h3>
+        <div class="byline">Author Name — Faculty of Law, BHU</div>
+      </article>
+    </div>
+    <p class="sans" style="color:var(--ink-soft); font-size:13.5px; margin-top:20px;">Placeholder entries — replace with confirmed titles, authors, and topic tags for the live issue.</p>
+  </div>
+</section>
+
+<section class="rule-top">
+  <div class="wrap">
+    <div class="section-title">About the Journal</div>
+    <div class="about-box">
+      <p>Founded in 1965 under the leadership of Justice N. H. Bhagwati, then Vice-Chancellor of Banaras Hindu University, and Professor Anand Jee, then Dean of the Law School, the Banaras Law Journal was the first of its kind published by an Indian university. It remains one of the country's earliest and most established platforms for peer-reviewed legal scholarship — publishing articles, notes, and book reviews from scholars, judges, practitioners, and students, biannually, under the Faculty of Law.</p>
+      <div class="quicklinks">
+        <a href="#submissions">Review Policy</a>
+        <a href="#archive">Subscriptions &amp; Back Volumes</a>
+        <a href="#board">Board of Reviewers</a>
+        <a href="#contact">Organization &amp; History</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="notes" class="rule-top">
+  <div class="wrap">
+    <div class="section-title">Latest Issue &amp; Notes</div>
+    <div class="mini-grid">
+      <div>
+        <h4 class="sans" style="font-size:13.5px; color:var(--ink-soft); font-weight:600; margin-bottom:10px;">Notes</h4>
+        <div class="mini-list">
+          <div class="mini-item">
+            <h4><a href="#">Habeas Jurisdiction and the High Courts: A Comparative Note</a></h4>
+            <div class="byline">Student Name, B.A. LL.B. (Hons.)</div>
+          </div>
+          <div class="mini-item">
+            <h4><a href="#">Personal Data and the Right to Be Forgotten: An Indian Approach</a></h4>
+            <div class="byline">Student Name, LL.M. Candidate</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 class="sans" style="font-size:13.5px; color:var(--ink-soft); font-weight:600; margin-bottom:10px;">Recent Case Comments</h4>
+        <div class="mini-list">
+          <div class="mini-item">
+            <h4><a href="#"><em>State v. Petitioner</em> — Reading Down Section 124A</a></h4>
+            <div class="byline">Student Name, Student Editor</div>
+          </div>
+          <div class="mini-item">
+            <h4><a href="#"><em>Union of India v. Respondent</em> — Locus in Public Interest Litigation</a></h4>
+            <div class="byline">Student Name, Student Editor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="submissions" class="rule-top">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div>
+        <h3>Review Policy</h3>
+        <p class="sans">Articles, notes, and book reviews are reviewed on a rolling, double-blind basis. Deadline: 30 September 2026.</p>
+      </div>
+      <a class="cta-btn" href="mailto:banlj.lawschool@bhu.ac.in">Read Policy</a>
+    </div>
+  </div>
+</section>
+
+<section id="explore" class="rule-top">
+  <div class="wrap">
+    <div class="section-title">Explore</div>
+    <div class="topic-pills" style="margin-bottom:36px;">
+      <a class="topic-pill" href="#author">Explore by Author</a>
+      <a class="topic-pill" href="#topic">Explore by Topic</a>
+      <a class="topic-pill" href="#volume">Explore by Volume</a>
+      <a class="topic-pill" href="#issue-exp">Explore by Issue</a>
+    </div>
+    <div class="section-title">Browse by Topic</div>
+    <div class="topic-pills">
+      <a class="topic-pill" href="#">Constitutional Law</a>
+      <a class="topic-pill" href="#">Criminal Law</a>
+      <a class="topic-pill" href="#">Environmental Law</a>
+      <a class="topic-pill" href="#">Arbitration</a>
+      <a class="topic-pill" href="#">Data Protection</a>
+      <a class="topic-pill" href="#">International Law</a>
+      <a class="topic-pill" href="#">Human Rights</a>
+      <a class="topic-pill" href="#">Jurisprudence</a>
+      <a class="topic-pill" href="#">All Topics →</a>
+    </div>
+  </div>
+</section>
+
+<section id="board" class="rule-top">
+  <div class="wrap">
+    <div class="section-title">Board of Reviewers</div>
+    <div class="mini-grid">
+      <div class="mini-list">
+        <div class="mini-item"><h4>Name of Dean</h4><div class="byline">Editor-in-Chief · Dean, Faculty of Law</div></div>
+        <div class="mini-item"><h4>Faculty Name</h4><div class="byline">Executive Editor</div></div>
+        <div class="mini-item"><h4>Faculty Name</h4><div class="byline">Associate Editor</div></div>
+      </div>
+      <div class="mini-list">
+        <div class="mini-item"><h4>Student Name</h4><div class="byline">Student Editor, B.A. LL.B. (Hons.)</div></div>
+        <div class="mini-item"><h4>Student Name</h4><div class="byline">Student Editor, LL.M.</div></div>
+        <div class="mini-item"><h4>Name of Advisor</h4><div class="byline">Advisory Board</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="archive" class="rule-top">
+  <div class="wrap">
+    <div class="section-title">Archives</div>
+    <div class="archive-list">
+      <a class="archive-row" href="#"><span>Volume LV</span><span class="yr">2026</span></a>
+      <a class="archive-row" href="#"><span>Volume LIV</span><span class="yr">2025</span></a>
+      <a class="archive-row" href="#"><span>Volume LIII</span><span class="yr">2024</span></a>
+      <a class="archive-row" href="#"><span>Volume LII</span><span class="yr">2023</span></a>
+      <a class="archive-row" href="#"><span>Volume LI</span><span class="yr">2022</span></a>
+      <a class="archive-row" href="#"><span>Centenary Special Issue</span><span class="yr">2016</span></a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <div class="fname">Banaras Law Journal</div>
+      <p class="fdesc sans">Faculty of Law, Banaras Hindu University, Varanasi – 221005, India. Published biannually since 1965. ISSN 0522-0815.</p>
+    </div>
+    <div>
+      <h5>Publications</h5>
+      <ul>
+        <li><a href="#blj">Banaras Law Journal</a></li>
+        <li><a href="#mslr">Mahamana Student Law Review</a></li>
+        <li><a href="#notes">Latest Issue</a></li>
+        <li><a href="#archive">Archives</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>About</h5>
+      <ul>
+        <li><a href="#board">Board of Reviewers</a></li>
+        <li><a href="#submissions">Review Policy</a></li>
+        <li><a href="#">Organization &amp; History</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:dean.lawschool@bhu.ac.in">dean.lawschool@bhu.ac.in</a></li>
+        <li><a href="mailto:banlj.lawschool@bhu.ac.in">banlj.lawschool@bhu.ac.in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Copyright © 1965–2026 Banaras Law Journal. All Rights Reserved.</span>
+    <span>Cite as Ban.L.J. (Bluebook)</span>
+  </div>
+</footer>
+
+</body>
+</html>
